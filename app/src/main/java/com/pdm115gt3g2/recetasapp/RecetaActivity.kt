@@ -46,13 +46,10 @@ class RecetaActivity : AppCompatActivity() {
         val descripcionTmp = parametros?.getString("descripcion")?:""
         val favoritoTmp = parametros?.getString("favorito")?:""
 
-        var fav = true
-        if (favoritoTmp == "") fav = false
-
-        idReceta.setText(idTmp)
-        nombre.setText(nombreTmp)
-        descripcion.setText(descripcionTmp)
-        favorito.isChecked = fav
+        if (favoritoTmp == "Favoritos") favorito.isChecked = true
+        idReceta.text = idTmp
+        nombre.text = nombreTmp
+        descripcion.text = descripcionTmp
 
         //actualizar favorito
         favorito.setOnClickListener{

@@ -40,4 +40,10 @@ class Repositorio(
             recetasDao.updateAll(receta)
         }
     }
+
+    fun updatePaso(paso: Pasos){
+        CoroutineScope(Dispatchers.IO).launch{
+            pasosDao.updateAll(paso)
+        }
+    }
 }

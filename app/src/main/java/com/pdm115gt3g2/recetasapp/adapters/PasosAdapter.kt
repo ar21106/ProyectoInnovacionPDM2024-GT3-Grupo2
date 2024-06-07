@@ -1,5 +1,6 @@
 package com.pdm115gt3g2.recetasapp.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.pdm115gt3g2.recetasapp.R
+import com.pdm115gt3g2.recetasapp.VerPasoActivity
 import com.pdm115gt3g2.recetasapp.db.tablas.Pasos
 
 class PasosAdapter(private var mList: List<Pasos>) : RecyclerView.Adapter<PasosAdapter.ViewHolder>(){
@@ -23,7 +25,9 @@ class PasosAdapter(private var mList: List<Pasos>) : RecyclerView.Adapter<PasosA
             pasoView.setOnClickListener(this)
         }
 
-        override fun onClick(v: View?) {
+        override fun onClick(v: View) {
+            val context = v.context
+            val intent = Intent(context,VerPasoActivity::class.java)
             val bundle = bundleOf(
                 "id" to txtid.text,
                 "idReceta" to txtidReceta.text,
@@ -33,6 +37,8 @@ class PasosAdapter(private var mList: List<Pasos>) : RecyclerView.Adapter<PasosA
                 "tiempoText" to txtTiempoTexto.text,
                 "completado" to txtCompletado.text
             )
+            intent.putExtras(bundle)
+            context.startActivity(intent)
         }
     }
 
