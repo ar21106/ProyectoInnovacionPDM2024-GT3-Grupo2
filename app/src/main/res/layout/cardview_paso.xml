@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img_paso"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:padding="10dp"
+            app:srcCompat="@drawable/check_decagram" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_paso_id"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:text="@string/defaul_text_short" />
+            <TextView
+                android:id="@+id/txt_paso_idReceta"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:text="@string/defaul_text_short" />
+            <TextView
+                android:id="@+id/txt_paso_tiempo_entero"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                android:text="@string/defaul_text_short" />
+
+            <TextView
+                android:id="@+id/txt_paso_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/defaul_text_short" />
+
+            <TextView
+                android:id="@+id/txt_paso_descripcion"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textStyle="italic"
+                android:visibility="invisible"
+                android:text="@string/defaul_text_long" />
+
+            <TextView
+                android:id="@+id/txt_paso_tiempo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                android:text="@string/defaul_text_short" />
+
+            <TextView
+                android:id="@+id/txt_paso_completado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:text="@string/defaul_text_short" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

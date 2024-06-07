@@ -9,6 +9,7 @@ data class Pasos(
     val titulo: String,
     val descripcion: String,
     val tiempoSegundos: Int,
+    val completado: Boolean = false,
 
     @PrimaryKey(autoGenerate = true)
     val idPaso: Int = 0

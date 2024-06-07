@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">RecetasApp</string>
+    <string name="inicio_titulo">Recetas disponibles:</string>
+    <string name="pasos_titulo">Pasos para la receta:</string>
+
+    <string name="defaul_text_short">Default text</string>
+    <string name="defaul_text_long">This is the long version of a Default text</string>
+
+    <string name="btn_agregar">AGREGAR</string>
+
+    <string name="txt_receta_nombre">Nombre de la receta</string>
+    <string name="txt_receta_descripcion">Descripcion de la receta</string>
+    <string name="txt_receta_favorito">Añadir a favoritos</string>
+    <string name="btn_receta_empezar">VER PASOS</string>
+    <string name="btn_receta_subir">SUBIR RECETA A LA NUBE</string>
 </resources>
