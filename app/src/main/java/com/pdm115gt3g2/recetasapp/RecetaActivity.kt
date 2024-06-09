@@ -4,14 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
 import com.pdm115gt3g2.recetasapp.db.RecetasAppDb
 import com.pdm115gt3g2.recetasapp.db.Repositorio
 import com.pdm115gt3g2.recetasapp.db.tablas.Recetas
+import com.pdm115gt3g2.recetasapp.model.RecetasResponse
+import com.pdm115gt3g2.recetasapp.retrofit.ApiService
+import com.pdm115gt3g2.recetasapp.retrofit.RetrofitClient
+import kotlinx.coroutines.launch
 
 class RecetaActivity : AppCompatActivity() {
 
@@ -20,6 +27,7 @@ class RecetaActivity : AppCompatActivity() {
     private lateinit var descripcion: TextView
     private lateinit var favorito: SwitchCompat
     private lateinit var btnComenzar: Button
+    private lateinit var btnSubir: Button
 
     lateinit var db: RecetasAppDb
     lateinit var repositorio: Repositorio
@@ -38,6 +46,7 @@ class RecetaActivity : AppCompatActivity() {
         descripcion = findViewById(R.id.txt_receta_descripcion_form)
         favorito = findViewById(R.id.swicth_receta_favorito)
         btnComenzar = findViewById(R.id.btn_empezar_receta)
+        btnSubir = findViewById(R.id.btn_subir_receta)
 
         //llenando el formulario
         val parametros = intent.extras
@@ -66,6 +75,36 @@ class RecetaActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        //boton subir a la nube
+        btnSubir.setOnClickListener {
+            subirReceta()
+        }
 
+
+    }
+
+    private fun subirReceta(){
+        val nom = nombre.text.toString()
+        val descr = descripcion.text.toString()
+        val favor = favorito.isChecked.toString()
+
+        lifecycleScope.launch {
+            try{
+                val call = RetrofitClient().getRetrofit().create(ApiService::class.java).insertReceta(nom, descr, favor)
+                if (call.isSuccessful){
+                    val responseBody = call.body()
+                    Toast.makeText(applicationContext, responseBody?.mensaje, Toast.LENGTH_SHORT).show()
+
+                }else{
+                    val errorBody = call.errorBody()?.string()
+                    val gson = Gson()
+                    val errorResponse = gson.fromJson(errorBody, RecetasResponse::class.java)
+                    Toast.makeText(applicationContext, errorResponse.mensaje, Toast.LENGTH_SHORT).show()
+                }
+
+            }catch (e: Exception) {
+                Toast.makeText(applicationContext, "Error: "+e.message, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

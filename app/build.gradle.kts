@@ -77,4 +77,10 @@ dependencies {
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:$room_version")
     //************** LIBRERIAS Y PLUGINS PARA USAR ROOM *****************
+
+    //************** RETROFIT y GSON*******************************************
+    val retrofit_version = "2.11.0"
+    implementation ("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation ("com.squareup.retrofit2:converter-gson:$retrofit_version")
+    //************** RETROFIT *******************************************
 }
