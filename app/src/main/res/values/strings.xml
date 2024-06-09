@@ -9,11 +9,14 @@
     <string name="btn_agregar">AGREGAR</string>
     <string name="btn_leer_paso">LEER INSTRUCCIONES</string>
     <string name="btn_leer_paso_stop">DEJAR DE LEER</string>
+    <string name="btn_leer_paso_wait">LECTOR: INICIALIZANDO...</string>
+    <string name="btn_leer_paso_error">LECTOR: OCURRIO UN ERROR</string>
     <string name="btn_tiempo_paso">CREAR ALERTA</string>
 
     <string name="txt_receta_nombre">Receta:</string>
     <string name="txt_receta_descripcion">Descripcion:</string>
     <string name="txt_receta_favorito">Añadir a favoritos</string>
+    <string name="txt_receta_ingredientes">Ingredientes necesarios:</string>
     <string name="btn_receta_empezar">VER PASOS</string>
     <string name="btn_receta_subir">SUBIR RECETA A LA NUBE</string>
 

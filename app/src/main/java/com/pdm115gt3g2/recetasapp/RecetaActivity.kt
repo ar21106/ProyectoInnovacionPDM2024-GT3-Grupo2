@@ -10,10 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.pdm115gt3g2.recetasapp.adapters.IngredientesAdapter
 import com.pdm115gt3g2.recetasapp.db.RecetasAppDb
 import com.pdm115gt3g2.recetasapp.db.Repositorio
+import com.pdm115gt3g2.recetasapp.db.tablas.Ingredientes
 import com.pdm115gt3g2.recetasapp.db.tablas.Recetas
 import com.pdm115gt3g2.recetasapp.model.RecetasResponse
 import com.pdm115gt3g2.recetasapp.retrofit.ApiService
@@ -60,12 +65,33 @@ class RecetaActivity : AppCompatActivity() {
         nombre.text = nombreTmp
         descripcion.text = descripcionTmp
 
+        //para usar el recycle view
+        val recyclerView = findViewById<RecyclerView>(R.id.recycleView_ingredientes)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //acceder a la db usando el repositorio
+        db = RecetasAppDb.getDatabase(applicationContext)
+        repositorio = Repositorio(db.recetasDao(), db.pasosDao(), db.ingredientesDao())
+
+        val ingredientes = MutableLiveData<List<Ingredientes>>()
+        repositorio.getIngredientesByIdReceta(idTmp.toInt()).observeForever{ingrediente->
+            ingredientes.postValue(ingrediente ?: emptyList())
+        }
+
+        val adapter = IngredientesAdapter(listOf())
+        ingredientes.observeForever{ingrediente->
+            ingrediente?.let {
+                adapter.updateItems(it)
+            } ?: run{
+                adapter.updateItems(emptyList())
+            }
+        }
+
+        recyclerView.adapter = adapter
+
         //actualizar favorito
         favorito.setOnClickListener{
-            val receta = Recetas(nombreTmp,descripcionTmp,favorito.isChecked,idTmp.toInt())
-            db = RecetasAppDb.getDatabase(applicationContext)
-            repositorio = Repositorio(db.recetasDao(),db.pasosDao())
-            repositorio.updateReceta(receta)
+            actualizarFavorito()
         }
 
         //boton comenzar a ver los pasos
@@ -81,6 +107,13 @@ class RecetaActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun actualizarFavorito(){
+        val receta = Recetas(nombre.text.toString(),descripcion.text.toString(),favorito.isChecked,idReceta.text.toString().toInt())
+        db = RecetasAppDb.getDatabase(applicationContext)
+        repositorio = Repositorio(db.recetasDao(),db.pasosDao(), db.ingredientesDao())
+        repositorio.updateReceta(receta)
     }
 
     private fun subirReceta(){

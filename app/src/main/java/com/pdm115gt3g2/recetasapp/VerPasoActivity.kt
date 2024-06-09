@@ -9,14 +9,12 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.pdm115gt3g2.recetasapp.db.RecetasAppDb
@@ -80,51 +78,61 @@ class VerPasoActivity : AppCompatActivity() {
 
         //actualizar como completado
         completado.setOnClickListener{
-            val paso = Pasos(idRecetaTmp.toInt(),tituloTmp,descripcionTmp,tiempoEnteroTmp.toInt(),completado.isChecked,idTmp.toInt())
-            db = RecetasAppDb.getDatabase(applicationContext)
-            repositorio = Repositorio(db.recetasDao(),db.pasosDao())
-            repositorio.updatePaso(paso)
+            actualizarCompletado()
         }
 
-        //leer instrucciones
+
+        //leer pasos
         textToSpeech = TextToSpeech(this) {status ->
-            if (status == TextToSpeech.SUCCESS){
-                Log.d("TextToSpeech", "Initialization Success")
-            }else{
-                Log.d("TextToSpeech", "Initialization Failed")
-            }
-        }
-        //textToSpeech.language = Locale.getDefault()
 
-        btnLeer.setOnClickListener{
-            if (textToSpeech.isSpeaking){
-                textToSpeech.stop()
+            if (status == TextToSpeech.SUCCESS){
                 btnLeer.text = getString(R.string.btn_leer_paso)
+                btnLeer.setOnClickListener{
+                    leerPasos()
+                }
             }else{
-                textToSpeech.speak(descripcion.text.toString(), TextToSpeech.QUEUE_ADD, null)
-                btnLeer.text = getString(R.string.btn_leer_paso_stop)
+                btnLeer.text = getString(R.string.btn_leer_paso_error)
             }
         }
+
 
         //crear alerta
         btnTiempo.setOnClickListener {
             crearCanal()
-            programarNotificacion(tiempoEnteroTmp.toLong(),parametros)
-            Toast.makeText(this,"la notificación aparecerá en $tiempoTextoTmp",Toast.LENGTH_SHORT).show()
+            programarNotificacion()
+            Toast.makeText(this,"la notificación aparecerá en ${tiempoTexto.text}",Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun programarNotificacion(
-        retraso: Long,
-        parametros: Bundle?
-    ) {
+    private fun actualizarCompletado(){
 
+        val paso = Pasos(idReceta.text.toString().toInt(),titulo.text.toString(),descripcion.text.toString(),tiempoEntero.text.toString().toInt(),completado.isChecked,idPaso.text.toString().toInt())
+        db = RecetasAppDb.getDatabase(applicationContext)
+        repositorio = Repositorio(db.recetasDao(),db.pasosDao(),db.ingredientesDao())
+        repositorio.updatePaso(paso)
+    }
+
+    private fun leerPasos(){
+
+        if (textToSpeech.isSpeaking){
+            textToSpeech.stop()
+            btnLeer.text = getString(R.string.btn_leer_paso)
+
+        }else{
+            textToSpeech.speak(descripcion.text.toString(), TextToSpeech.QUEUE_ADD, null)
+            btnLeer.text = getString(R.string.btn_leer_paso_stop)
+        }
+    }
+
+    private fun programarNotificacion() {
+
+        val retraso = tiempoEntero.text.toString().toLong()
         val intent = Intent(applicationContext, AlarmaNotificacion::class.java)
-        intent.putExtras(parametros ?: bundleOf())
+        intent.putExtra("titulo", titulo.text)
 
         val pendingIntent = PendingIntent.getBroadcast(applicationContext, AlarmaNotificacion.id_notificacion, intent, PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + retraso, pendingIntent)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + retraso*1000, pendingIntent)
     }
 
     fun crearCanal(){

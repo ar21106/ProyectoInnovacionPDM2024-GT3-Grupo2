@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img_ingrediente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="10dp"
+            app:srcCompat="@drawable/tag" />
+
+        <TextView
+            android:id="@+id/txt_ingrediente_id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="@string/defaul_text_short" />
+        <TextView
+            android:id="@+id/txt_ingrediente_idReceta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="@string/defaul_text_short" />
+
+        <TextView
+            android:id="@+id/txt_ingrediente_nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:text="@string/defaul_text_short" />
+
+        <TextView
+            android:id="@+id/txt_ingrediente_cantidad"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:text="@string/defaul_text_short" />
+
+        <TextView
+            android:id="@+id/txt_ingrediente_umedida"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textStyle="italic"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:text="@string/defaul_text_short" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

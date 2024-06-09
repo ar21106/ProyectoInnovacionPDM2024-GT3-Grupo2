@@ -1,8 +1,10 @@
 package com.pdm115gt3g2.recetasapp.db
 
 import androidx.lifecycle.LiveData
+import com.pdm115gt3g2.recetasapp.db.dao.IngredientesDao
 import com.pdm115gt3g2.recetasapp.db.dao.PasosDao
 import com.pdm115gt3g2.recetasapp.db.dao.RecetasDao
+import com.pdm115gt3g2.recetasapp.db.tablas.Ingredientes
 import com.pdm115gt3g2.recetasapp.db.tablas.Pasos
 import com.pdm115gt3g2.recetasapp.db.tablas.Recetas
 import kotlinx.coroutines.CoroutineScope
@@ -19,7 +21,8 @@ import kotlinx.coroutines.launch
  */
 class Repositorio(
     private var recetasDao: RecetasDao,
-    private var pasosDao: PasosDao
+    private var pasosDao: PasosDao,
+    private var ingredientesDao: IngredientesDao
 ){
     fun getRecetas(): LiveData<List<Recetas>>{
         return recetasDao.getAll()
@@ -27,6 +30,10 @@ class Repositorio(
 
     fun getPasosByIdReceta(idReceta: Int): LiveData<List<Pasos>>{
         return pasosDao.getByIdReceta(idReceta)
+    }
+
+    fun getIngredientesByIdReceta(idReceta: Int): LiveData<List<Ingredientes>>{
+        return ingredientesDao.getByIdReceta(idReceta)
     }
 
     fun insertReceta(receta: Recetas){

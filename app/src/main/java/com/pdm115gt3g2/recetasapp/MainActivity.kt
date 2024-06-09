@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         //acceder a la db usando el repositorio
         db = RecetasAppDb.getDatabase(applicationContext)
-        repositorio = Repositorio(db.recetasDao(), db.pasosDao())
+        repositorio = Repositorio(db.recetasDao(), db.pasosDao(), db.ingredientesDao())
 
         val recetas = MutableLiveData<List<Recetas>>()
         repositorio.getRecetas().observeForever{receta->

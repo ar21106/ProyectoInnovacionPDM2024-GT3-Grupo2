@@ -37,7 +37,7 @@ class PasosActivity : AppCompatActivity() {
 
         //acceder a la db usando el repositorio
         db = RecetasAppDb.getDatabase(applicationContext)
-        repositorio = Repositorio(db.recetasDao(), db.pasosDao())
+        repositorio = Repositorio(db.recetasDao(), db.pasosDao(), db.ingredientesDao())
 
         val pasos = MutableLiveData<List<Pasos>>()
         repositorio.getPasosByIdReceta(idReceta.toInt()).observeForever{paso->
