@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity
 data class Ingredientes(
     val idReceta: Int,
-    val idMedida: Int,
+    val uMedida: String,
     val nombre: String,
-    val cantidad: Int,
+    val cantidad: Double,
 
     @PrimaryKey(autoGenerate = true)
     val idIngrediente: Int = 0

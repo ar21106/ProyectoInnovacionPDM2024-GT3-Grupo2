@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VerPasoActivity">
+
+    <ImageView
+        android:id="@+id/img_receta_form"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/check_decagram" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_receta_form">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_paso_id_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/defaul_text_short"
+                android:visibility="invisible" />
+            <TextView
+                android:id="@+id/txt_paso_idReceta_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/defaul_text_short"
+                android:visibility="invisible" />
+            <TextView
+                android:id="@+id/txt_paso_tiempoEntero_form"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="@string/defaul_text_short"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lbl_paso_titulo_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_paso_titulo"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_paso_titulo_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/defaul_text_short"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/lbl_paso_descripcion_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_paso_descripcion"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_paso_descripcion_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/defaul_text_long"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_leer_paso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:text="@string/btn_leer_paso_wait" />
+
+            <TextView
+                android:id="@+id/lbl_paso_tiempoTexto_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_paso_tiempo"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/txt_paso_tiempoTexto_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/defaul_text_short"
+                android:textColor="@color/green"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_paso_tiempo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/green"
+                android:text="@string/btn_tiempo_paso"
+                app:icon="@drawable/timer_play" />
+
+            <CheckBox
+                android:id="@+id/checkbox_paso_completado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/txt_paso_completado" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
